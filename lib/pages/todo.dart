@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
-
-
+import 'package:localstorage/localstorage.dart';
 
 class TodoPage extends StatefulWidget {
   const TodoPage({super.key, required this.title});
@@ -14,17 +12,45 @@ class TodoPage extends StatefulWidget {
 class _TodoPageState extends State<TodoPage> {
   final TextEditingController _controller = TextEditingController();
   List<dynamic> list = [];
-  
+  final storage = new LocalStorage('todo_app.json');
+  bool initialized = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadList();
+  }
+
+  void _loadList() async {
+    await storage.ready;
+    setState(() {
+      list = storage.getItem('todos') ?? [
+        "Helo!",
+      ];
+      initialized = true;
+    });
+  }
+
+  void _saveList() {
+    storage.setItem('todos', list);
+  }
+
   void _incrementCounter() {
     setState(() {
-      list.add(_controller.text);
-      _controller.text = "";
+      if (_controller.text == "") {
+        _controller.text = "This field cant be empty";
+      } else {
+        list.add(_controller.text);
+        _controller.text = "";
+        _saveList();
+      }
     });
   }
 
   void deleteItemFromList(int index) {
     setState(() {
       list.removeAt(index);
+      _saveList();
     });
   }
 
@@ -32,14 +58,23 @@ class _TodoPageState extends State<TodoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Todo Page'),
+        title: Text(
+          'Todo Page',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        centerTitle: true,
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text('Awesome to-do list app on flutter'),
-            Text('${list.length}', style: Theme.of(context).textTheme.headlineMedium),
+            Text('${list.length}',
+                style: Theme.of(context).textTheme.headlineMedium),
             const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -57,11 +92,7 @@ class _TodoPageState extends State<TodoPage> {
               ],
             ),
             Row(
-              children: <Widget>[
-                Divider(
-                  color: Colors.black
-                )
-              ],
+              children: <Widget>[Divider(color: Colors.black)],
             ),
             Expanded(
               child: ListView.builder(
@@ -86,7 +117,6 @@ class _TodoPageState extends State<TodoPage> {
                 },
               ),
             )
-
           ],
         ),
       ),
