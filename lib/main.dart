@@ -72,7 +72,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => TodoPage(title: 'Todo Page')),
+                              builder: (context) =>
+                                  const TodoPage(title: 'Todo Page')),
                         );
                       },
                       child: const Text(

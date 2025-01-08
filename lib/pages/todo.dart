@@ -12,7 +12,7 @@ class TodoPage extends StatefulWidget {
 class _TodoPageState extends State<TodoPage> {
   final TextEditingController _controller = TextEditingController();
   List<dynamic> list = [];
-  final storage = new LocalStorage('todo_app.json');
+  final storage =  LocalStorage('todo_app.json');
   bool initialized = false;
 
   @override
@@ -45,7 +45,7 @@ class _TodoPageState extends State<TodoPage> {
         _saveList();
       }
     });
-  }
+  } 
 
   void deleteItemFromList(int index) {
     setState(() {
