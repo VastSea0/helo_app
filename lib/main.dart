@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:helo_app/pages/login.dart';
 import 'pages/todo.dart';
+import 'models/page_card_models.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,6 +28,11 @@ class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
   final String title;
 
+  static final List<Pages> pages = [
+    Pages(name: "Todo Page", func: () => TodoPage(title: 'Todo Page')),
+    Pages(name: "Login Page", func: () => LoginPage(title: 'Login Page')),
+  ];
+
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
@@ -35,61 +42,55 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home Page",
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            )),
+        title: Text("Home Page"),
         centerTitle: true,
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primaryContainer,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              margin: EdgeInsets.all(16),
-              padding: EdgeInsets.all(16),
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment
-                      .center, // Optional, to center the content vertically
-                  children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        const Text('To-Do Page '),
-                        const Icon(Icons.check),
-                      ],
-                    ),
-                    const SizedBox(height: 20),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const TodoPage(title: 'Todo Page')),
-                        );
-                      },
-                      child: const Text(
-                        'Go to Todo Page',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text("All of these are fucking amazing pages I have written"),
+              Column(
+                children: List.generate(
+                  MyHomePage.pages.length,
+                  (index) => ListTile(
+                    title: Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primaryContainer,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      margin: EdgeInsets.all(16),
+                      padding: EdgeInsets.all(16),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          MyHomePage.pages[index].func()),
+                                );
+                              },
+                              child: Text(
+                                MyHomePage.pages[index].name ?? 'No Name',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                    color:
+                                        Theme.of(context).colorScheme.primary),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                  ],
+                  ),
                 ),
               ),
-            )
-          ],
-        ),
+            ]),
       ),
     );
   }
