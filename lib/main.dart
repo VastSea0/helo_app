@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:helo_app/constants/theme.dart';
 import 'package:helo_app/pages/login.dart';
 import 'pages/todo.dart';
 import 'models/page_card_models.dart';
@@ -14,10 +15,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'My great Flutter App',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: AppTheme.lightThemeData(context),
+      darkTheme: AppTheme.darkThemeData(),
+      themeMode: ThemeMode.system,
       home: const MyHomePage(
           title: 'Home Page'), // Home sayfasını burada ayarlıyoruz
     );
@@ -42,14 +42,21 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home Page"),
+        title: Text(
+          "Home Page",
+          style: TextStyle(color: Theme.of(context).colorScheme.primary),
+        ),
         centerTitle: true,
       ),
       body: Center(
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text("All of these are fucking amazing pages I have written"),
+              Center(
+                  child: Text(
+                "All of these are fucking amazing pages I have written",
+                style: TextStyle(color: Theme.of(context).colorScheme.primary),
+              )),
               Column(
                 children: List.generate(
                   MyHomePage.pages.length,
@@ -77,10 +84,12 @@ class _MyHomePageState extends State<MyHomePage> {
                               child: Text(
                                 MyHomePage.pages[index].name ?? 'No Name',
                                 style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                    color:
-                                        Theme.of(context).colorScheme.primary),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onPrimaryContainer,
+                                ),
                               ),
                             ),
                           ],

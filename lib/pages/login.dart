@@ -8,13 +8,18 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login to App'),
+        title: Text(
+          'Login to App',
+          style: TextStyle(color: Theme.of(context).colorScheme.primary),
+        ),
+        centerTitle: true,
+      ),
+      body: Center(
+        child: Text("helo"),
       ),
     );
   }

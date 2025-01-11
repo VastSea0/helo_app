@@ -62,10 +62,9 @@ class _TodoPageState extends State<TodoPage> {
         title: Text(
           'Todo Page',
           style: TextStyle(
-            color: Colors.black,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).colorScheme.primary),
         ),
         centerTitle: true,
       ),
@@ -73,9 +72,14 @@ class _TodoPageState extends State<TodoPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text('Awesome to-do list app on flutter'),
+            Text(
+              'Awesome to-do list app on flutter',
+              style: TextStyle(color: Theme.of(context).colorScheme.primary),
+            ),
             Text('${list.length}',
-                style: Theme.of(context).textTheme.headlineMedium),
+                style: TextStyle(
+                    fontSize: 24,
+                    color: Theme.of(context).colorScheme.primary)),
             const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -84,9 +88,32 @@ class _TodoPageState extends State<TodoPage> {
                   width: 200,
                   child: TextField(
                     controller: _controller,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Enter item',
+                      labelStyle: TextStyle(
+                        color: Theme.of(context)
+                            .colorScheme
+                            .primary, // Label rengini tema ile eşleştir
+                      ),
+                      hintText: 'Type something...',
+                      hintStyle: TextStyle(
+                        color: Theme.of(context)
+                            .colorScheme
+                            .secondary, // İpucu yazı rengini tema ile eşleştir
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .primary, // Odaklanınca kenar rengi
+                        ),
+                      ),
+                    ),
+                    style: TextStyle(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .primary, // TextField içine yazılan metin rengi
                     ),
                     onSubmitted: (String value) {
                       _incrementCounter();
@@ -96,7 +123,7 @@ class _TodoPageState extends State<TodoPage> {
               ],
             ),
             Row(
-              children: <Widget>[Divider(color: Colors.black)],
+              children: <Widget>[Divider()],
             ),
             Expanded(
               child: ListView.builder(
