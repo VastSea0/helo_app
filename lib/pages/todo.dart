@@ -21,7 +21,7 @@ class _TodoPageState extends State<TodoPage> {
     _loadList();
   }
 
-  void _loadList() async {
+  Future<void> _loadList() async {
     await storage.ready;
     setState(() {
       list = storage.getItem('todos') ??
