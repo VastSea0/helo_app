@@ -97,11 +97,11 @@ class _LoginPageState extends State<LoginPage> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         OutlinedButton(
-                          child: Text("Login"),
                           style: ButtonStyle(
                               minimumSize: WidgetStateProperty.all(
                                   Size(double.infinity, 50))),
                           onPressed: () {},
+                          child: Text("Login"),
                         )
                       ],
                     )
