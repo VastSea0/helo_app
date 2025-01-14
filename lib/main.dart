@@ -3,7 +3,7 @@ import 'package:helo_app/constants/theme.dart';
 import 'package:helo_app/pages/login.dart';
 import 'pages/todo.dart';
 import 'models/page_card_models.dart';
-import "pages/hava-durumu.dart";
+import "pages/hava_durumu.dart";
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
