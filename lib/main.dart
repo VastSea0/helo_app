@@ -3,7 +3,7 @@ import 'package:helo_app/constants/theme.dart';
 import 'package:helo_app/pages/login.dart';
 import 'pages/todo.dart';
 import 'models/page_card_models.dart';
-
+import "pages/hava-durumu.dart";
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,7 +18,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  ThemeMode _themeMode = ThemeMode.system;
+  ThemeMode _themeMode = ThemeMode.light;
 
   void _toggleThemeMode(bool isDark) {
     setState(() {
@@ -57,6 +57,7 @@ class MyHomePage extends StatefulWidget {
   static final List<Pages> pages = [
     Pages(name: "Todo Page", func: () => TodoPage(title: 'Todo Page')),
     Pages(name: "Login Page", func: () => LoginPage(title: 'Login Page')),
+    Pages(name: "Weather Page", func: () => WeatherUI(title: 'Weather Page')),
   ];
 
   @override
@@ -135,7 +136,7 @@ class _MyHomePageState extends State<MyHomePage>
               },
               child: Row(
                 children: [
-                  const Icon(Icons.account_box_sharp),
+                  const Icon(Icons.arrow_forward),
                   const SizedBox(width: 8),
                   Text(
                     MyHomePage.pages[index].name ?? 'No Name',
