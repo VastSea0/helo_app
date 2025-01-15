@@ -179,16 +179,16 @@ class _WeatherUIState extends State<WeatherUI> {
                                                 MainAxisAlignment.end,
                                             children: [
                                               TextField(
-                                                  decoration: InputDecoration(
-                                                    border:
-                                                        OutlineInputBorder(),
-                                                    labelText:
-                                                        "Enter Your Country",
-                                                  ),
-                                                  style: TextStyle(
-                                                      color: Colors
-                                                          .black // TextField içine yazılan metin rengi
-                                                      )),
+                                                decoration: InputDecoration(
+                                                  border: OutlineInputBorder(),
+                                                  labelText:
+                                                      "Enter Your Country",
+                                                ),
+                                                style: TextStyle(
+                                                  color: Colors
+                                                      .black, // TextField içine yazılan metin rengi
+                                                ),
+                                              ),
                                             ],
                                           ),
                                         ),
